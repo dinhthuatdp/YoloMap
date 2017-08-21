@@ -40,4 +40,24 @@ public class UserDaoImpl implements UserDao {
 		
 		this.dataSource = dataSource;
 	}
+
+	@Override
+	public boolean signUp(String userName, String password) throws SQLException {
+
+		String query = "insert into user(user_name, password) value(?,?)";
+		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
+		pstmt.setString(1, userName);
+		pstmt.setString(2, password);
+		try {
+
+			int result = pstmt.executeUpdate();
+			if (result > 0) {
+
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

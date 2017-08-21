@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService {
 		 return userDao.isValidUser(userName, password);
 	}
 
+	@Override
+	public boolean signUp(String userName, String password) throws SQLException  {
+		 
+		return userDao.signUp(userName, password);
+	}
+
 }

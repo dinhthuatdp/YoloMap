@@ -31,6 +31,7 @@
 </body>
 -->
 	<body>
+		<h1>Login</h1>
 		<form:form id="loginForm" method="post" action="${pageContext.request.contextPath}/login.html" modelAttribute="loginBean">
 
 			<form:label path="user_name">Enter your user-name</form:label>
