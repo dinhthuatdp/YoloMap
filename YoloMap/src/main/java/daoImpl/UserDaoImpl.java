@@ -21,11 +21,14 @@ public class UserDaoImpl implements UserDao {
 		pstmt.setString(2, password);
 		ResultSet resultSet = pstmt.executeQuery();
 		if (resultSet.next()) {
-			return true;
-		}
-		else {
+
+			if(resultSet.getInt("Count(*)") >= 1) {
+				
+				return true;
+			}
 			return false;
 		}
+		return false;
 	}
 	
 	public DataSource getDataSource() {
