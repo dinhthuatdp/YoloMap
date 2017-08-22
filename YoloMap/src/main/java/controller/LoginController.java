@@ -52,12 +52,16 @@ public class LoginController {
 			{
 				model = new ModelAndView("login");
 				model.addObject("loginBean", loginBean);
+				request.setAttribute("errorMessage", "Login error!!");
 				request.setAttribute("message", "Invalid credentials!!");
 			}
 
 		}
 		catch(Exception e)
 		{
+			model = new ModelAndView("login");
+			model.addObject("loginBean", loginBean);
+			request.setAttribute("errorMessage", "Login error!!");
 			e.printStackTrace();
 		}
 

@@ -34,6 +34,9 @@
 		<h1>Login</h1>
 		<form:form id="loginForm" method="post" action="${pageContext.request.contextPath}/login.html" modelAttribute="loginBean">
 
+			<c:if test="${not empty errorMessage}">
+				<h3 style='color:red'><%=request.getAttribute("errorMessage") %></h3>
+			</c:if>
 			<form:label path="user_name">Enter your user-name</form:label>
 			<form:input id="username" name="username" path="user_name" /><br>
 			<form:label path="user_name">Please enter your password</form:label>
