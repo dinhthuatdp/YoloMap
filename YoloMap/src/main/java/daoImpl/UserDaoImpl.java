@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import dao.UserDao;
 
 public class UserDaoImpl implements UserDao {
@@ -15,14 +17,17 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean isValidUser(String userName, String password) throws SQLException {
 	
-		String query = "select Count(*) from user where user_name = ? and password = ?";
+		String query = "select user_name, password from user where user_name = ?";
 		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
 		pstmt.setString(1, userName);
-		pstmt.setString(2, password);
+		//pstmt.setString(2, password);
 		ResultSet resultSet = pstmt.executeQuery();
+		
 		if (resultSet.next()) {
 
-			if(resultSet.getInt("Count(*)") >= 1) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			//if(resultSet.getInt("Count(*)") >= 1) {
+			if (encoder.matches(password, resultSet.getString("password"))) {
 				
 				return true;
 			}

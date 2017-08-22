@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +36,10 @@ public class SignUpController {
 		ModelAndView model= null;
 		try
 		{
-			boolean isValidUser = userService.signUp(loginBean.getUser_name(), loginBean.getPassword());
+			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(loginBean.getPassword());
+
+			boolean isValidUser = userService.signUp(loginBean.getUser_name(), hashedPassword);
 			if(isValidUser)
 			{
 				System.out.println("Sign up Successful");
