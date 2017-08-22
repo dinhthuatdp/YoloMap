@@ -47,12 +47,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public boolean signUp(String userName, String password) throws SQLException {
+	public boolean signUp(String userName, String password, String email, String create_date) throws SQLException {
 
-		String query = "insert into user(user_name, password) value(?,?)";
+		String query = "insert into user(user_name, password, email, create_date) value(?,?,?,?)";
 		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
 		pstmt.setString(1, userName);
 		pstmt.setString(2, password);
+		pstmt.setString(3, email);
+		pstmt.setString(4, create_date);
 		try {
 
 			int result = pstmt.executeUpdate();

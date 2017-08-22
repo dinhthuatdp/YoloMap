@@ -20,6 +20,8 @@
 		<form:input id="username" name="username" path="user_name" /><br>
 		<form:label path="user_name">Please enter your password</form:label>
 		<form:password id="password" name="password" path="password" /><br>
+		<form:label path="email">Please enter your email</form:label>
+		<form:input id="email" name="email" path="email" /><br>
 		<input type="submit" value="Sign Up" />
 	</form:form>
 </body>

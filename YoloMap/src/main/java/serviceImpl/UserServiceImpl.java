@@ -26,9 +26,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean signUp(String userName, String password) throws SQLException  {
+	public boolean signUp(String userName, String password, String email, String create_date) throws SQLException  {
 		 
-		return userDao.signUp(userName, password);
+		return userDao.signUp(userName, password, email, create_date);
 	}
 
 }

@@ -1,5 +1,8 @@
 package controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,7 +42,9 @@ public class SignUpController {
 			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(loginBean.getPassword());
 
-			boolean isValidUser = userService.signUp(loginBean.getUser_name(), hashedPassword);
+			//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+			boolean isValidUser = userService.signUp(loginBean.getUser_name(), hashedPassword, loginBean.getEmail(), dtf.format(LocalDateTime.now()));
 			if(isValidUser)
 			{
 				System.out.println("Sign up Successful");
